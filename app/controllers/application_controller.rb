@@ -4,46 +4,46 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
   end
 
-  get '/articles' do
-      @articles = Article.all
+  get '/recipes' do
+      @recipes = Recipe.all
 
       erb :index
     end
 
-    get '/articles/new' do
+    get '/recipes/new' do
       erb :new
     end
 
-    get '/articles/:id' do
-      @article = Article.find(params[:id])
+    get '/recipes/:id' do
+      @recipe = recipe.find(params[:id])
 
       erb :show
     end
 
-    get '/articles/:id/edit' do
-      @article = Article.find(params[:id])
+    get '/recipes/:id/edit' do
+      @recipe = recipe.find(params[:id])
 
       erb :edit
     end
 
-    patch '/articles/:id' do
-      article = Article.find(params[:id])
-      article.update(title: params[:new_title], content: params[:new_content])
+    patch '/recipes/:id' do
+      recipe = recipe.find(params[:id])
+      recipe.update(title: params[:new_title], content: params[:new_content])
 
-      redirect to "/articles/#{article.id}"
+      redirect to "/recipes/#{recipe.id}"
     end
 
-    delete '/articles/:id/delete' do
-      article = Article.find(params[:id])
-      article.destroy
+    delete '/recipes/:id/delete' do
+      recipe = recipe.find(params[:id])
+      recipe.destroy
 
-      redirect to '/articles'
+      redirect to '/recipes'
     end
 
-    post '/articles' do
-      article = Article.create(title: params[:title], content: params[:content])
+    post '/recipes' do
+      recipe = recipe.create(title: params[:title], content: params[:content])
 
-      redirect to "/articles/#{article.id}"
+      redirect to "/recipes/#{recipe.id}"
     end
 
 end
